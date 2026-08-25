@@ -686,7 +686,10 @@ function hexToDec(hex) {
 
 function isHex(str) {
   if (!str) return false;
-  const clean = String(str).trim().toUpperCase().replace(/[^0-9A-F]/g, '');
+  const original = String(str).trim();
+  // Rejeita strings que contenham caracteres típicos de datas ou horários
+  if (/[\/\-\.:]/.test(original)) return false;
+  const clean = original.toUpperCase().replace(/[^0-9A-F]/g, '');
   return clean.length >= 8 && /^[0-9A-F]+$/.test(clean);
 }
 
@@ -810,11 +813,25 @@ function tableToJson(table) {
   return data;
 }
 
-function findColumn(headers, keywords) {
+function findColumn(headers, keywords, excludeKeywords = []) {
   for (const h of headers) {
     const nh = normalize(h);
+    let match = false;
     for (const kw of keywords) {
-      if (nh.includes(normalize(kw))) return h;
+      if (nh.includes(normalize(kw))) {
+        match = true;
+        break;
+      }
+    }
+    if (match) {
+      let excluded = false;
+      for (const ekw of excludeKeywords) {
+        if (nh.includes(normalize(ekw))) {
+          excluded = true;
+          break;
+        }
+      }
+      if (!excluded) return h;
     }
   }
   return null;
@@ -830,7 +847,7 @@ function processData(data) {
   const colFase = findColumn(headers, ['fase', 'status', 'etapa']);
   const colAwb = findColumn(headers, ['awb', 'nº awb', 'numero awb', 'tracking', 'rastreio']);
   const colTransportadora = findColumn(headers, ['transportadora', 'courier', 'transportador']);
-  const colColeta = findColumn(headers, ['coleta', 'n° coleta', 'numero coleta']);
+  const colColeta = findColumn(headers, ['n° coleta', 'nº coleta', 'numero coleta', 'número coleta'], ['data', 'agendamento', 'horario', 'horário', 'endereço', 'endereco']);
   
   if (!colAwb) {
     showWarning('Não foi encontrada a coluna de AWB na planilha.');
@@ -868,7 +885,11 @@ function processData(data) {
     let awbInfo;
     if (carrier === 'FEDEX') {
       awbInfo = processFedExAwb(awbRaw);
-      if (!awbInfo.converted && isHex(coleta)) {
+      // Fallback: só tenta usar coluna de coleta se o AWB original NÃO for um formato válido
+      // e se existir uma coluna de número de coleta (não data) identificada
+      const awbStr = String(awbRaw || '').trim();
+      const awbValido = /^\d{12}$/.test(awbStr.replace(/\D/g, '')) || isHex(awbStr);
+      if (!awbValido && colColeta && isHex(coleta)) {
         const coletaDec = hexToDec(coleta);
         if (coletaDec) awbInfo = { value: coletaDec.padStart(12, '0').slice(-12), converted: true };
       }
