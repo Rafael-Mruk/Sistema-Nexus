@@ -17,6 +17,8 @@
     --pink: #ff006e;
     --dark: #0a0a1a;
     --darker: #050510;
+    --green: #10b981;
+    --orange: #ff6b35;
   }
   
   body {
@@ -53,50 +55,19 @@
     animation: float 15s ease-in-out infinite;
   }
   
-  @keyframes gridMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(-2%, 2%) rotate(1deg); }
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  
+  @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
+  @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-2%, 2%) rotate(1deg); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
   @keyframes glow {
     0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(0, 240, 255, 0.05); }
     50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.5), inset 0 0 30px rgba(0, 240, 255, 0.1); }
   }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scanLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
   
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .container { max-width: 1280px; margin: 0 auto; position: relative; }
   
-  @keyframes scanLine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-  
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    position: relative;
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 30px 20px;
-    position: relative;
-    animation: slideUp 0.8s ease-out;
-  }
-  
+  .header { text-align: center; margin-bottom: 40px; padding: 30px 20px; position: relative; animation: slideUp 0.8s ease-out; }
   .header .logo {
     font-family: 'Orbitron', monospace;
     font-size: 42px;
@@ -109,24 +80,8 @@
     text-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
     margin-bottom: 8px;
   }
-  
-  .header .subtitle {
-    font-family: 'Orbitron', monospace;
-    font-size: 12px;
-    color: var(--cyan);
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
-  
-  .header .specs {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
+  .header .subtitle { font-family: 'Orbitron', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 6px; text-transform: uppercase; opacity: 0.8; }
+  .header .specs { margin-top: 15px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
   .header .spec-item {
     font-family: 'Orbitron', monospace;
     font-size: 10px;
@@ -153,43 +108,12 @@
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  
-  .upload-area::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-    animation: scanLine 3s linear infinite;
-  }
-  
-  .upload-area:hover {
-    border-color: rgba(0, 240, 255, 0.6);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2), inset 0 0 40px rgba(0, 240, 255, 0.05);
-  }
-  
-  .upload-area.dragover {
-    border-color: var(--cyan);
-    background: linear-gradient(135deg, rgba(0, 100, 150, 0.3) 0%, rgba(50, 0, 100, 0.3) 100%);
-    transform: scale(1.02);
-  }
-  
+  .upload-area::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); animation: scanLine 3s linear infinite; }
+  .upload-area:hover { border-color: rgba(0, 240, 255, 0.6); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2), inset 0 0 40px rgba(0, 240, 255, 0.05); }
+  .upload-area.dragover { border-color: var(--cyan); background: linear-gradient(135deg, rgba(0, 100, 150, 0.3) 0%, rgba(50, 0, 100, 0.3) 100%); transform: scale(1.02); }
   .upload-area input[type="file"] { display: none; }
-  
-  .upload-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    position: relative;
-  }
-  
-  .upload-icon svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
-  }
-  
+  .upload-icon { width: 80px; height: 80px; margin: 0 auto 20px; position: relative; }
+  .upload-icon svg { width: 100%; height: 100%; filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5)); }
   .upload-label {
     display: inline-block;
     font-family: 'Orbitron', monospace;
@@ -206,319 +130,55 @@
     box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
     border: none;
   }
+  .upload-label:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 30px rgba(0, 240, 255, 0.6); }
+  .upload-hint { margin-top: 16px; color: rgba(200, 200, 255, 0.5); font-size: 13px; letter-spacing: 1px; }
+  .file-name { margin-top: 20px; font-family: 'Orbitron', monospace; color: var(--cyan); font-size: 12px; letter-spacing: 1px; padding: 10px 20px; background: rgba(0, 240, 255, 0.1); border-radius: 10px; display: inline-block; border: 1px solid rgba(0, 240, 255, 0.2); }
   
-  .upload-label:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(0, 240, 255, 0.6);
-  }
-  
-  .upload-hint {
-    margin-top: 16px;
-    color: rgba(200, 200, 255, 0.5);
-    font-size: 13px;
-    letter-spacing: 1px;
-  }
-  
-  .file-name {
-    margin-top: 20px;
-    font-family: 'Orbitron', monospace;
-    color: var(--cyan);
-    font-size: 12px;
-    letter-spacing: 1px;
-    padding: 10px 20px;
-    background: rgba(0, 240, 255, 0.1);
-    border-radius: 10px;
-    display: inline-block;
-    border: 1px solid rgba(0, 240, 255, 0.2);
-  }
-  
-  .warning {
-    background: linear-gradient(135deg, rgba(80, 20, 20, 0.9) 0%, rgba(120, 30, 30, 0.9) 100%);
-    backdrop-filter: blur(10px);
-    border-left: 4px solid #ff4444;
-    color: #ffcccc;
-    padding: 18px 24px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    display: none;
-    animation: slideUp 0.5s ease-out;
-    border: 1px solid rgba(255, 68, 68, 0.3);
-    box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2);
-  }
+  .warning { background: linear-gradient(135deg, rgba(80, 20, 20, 0.9) 0%, rgba(120, 30, 30, 0.9) 100%); backdrop-filter: blur(10px); border-left: 4px solid #ff4444; color: #ffcccc; padding: 18px 24px; border-radius: 12px; margin-bottom: 25px; display: none; animation: slideUp 0.5s ease-out; border: 1px solid rgba(255, 68, 68, 0.3); box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2); }
   .warning.show { display: block; }
   
-  .summary {
-    background: linear-gradient(135deg, rgba(10, 10, 40, 0.8) 0%, rgba(20, 10, 50, 0.8) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    display: none;
-    animation: slideUp 0.6s ease-out;
-  }
+  .summary { background: linear-gradient(135deg, rgba(10, 10, 40, 0.8) 0%, rgba(20, 10, 50, 0.8) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 16px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(0, 240, 255, 0.2); display: none; animation: slideUp 0.6s ease-out; }
   .summary.show { display: block; }
+  .summary h3 { font-family: 'Orbitron', monospace; color: var(--cyan); margin-bottom: 20px; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  .summary h3::before { content: ''; width: 4px; height: 16px; background: var(--cyan); border-radius: 2px; box-shadow: 0 0 10px var(--cyan); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+  .summary-card { position: relative; background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 240, 255, 0.15); overflow: hidden; transition: all 0.3s; }
+  .summary-card:hover { transform: translateY(-3px); border-color: rgba(0, 240, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15); }
+  .summary-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+  .summary-card .num { font-family: 'Orbitron', monospace; font-size: 36px; font-weight: 800; background: linear-gradient(135deg, var(--cyan) 0%, #fff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+  .summary-card .lbl { font-family: 'Orbitron', monospace; font-size: 10px; color: rgba(200, 200, 255, 0.7); margin-top: 8px; letter-spacing: 1.5px; text-transform: uppercase; }
   
-  .summary h3 {
+  .phase-section { background: linear-gradient(135deg, rgba(10, 10, 40, 0.8) 0%, rgba(20, 10, 50, 0.8) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 16px; padding: 28px; margin-bottom: 25px; border: 1px solid rgba(0, 240, 255, 0.15); animation: slideUp 0.6s ease-out; position: relative; overflow: hidden; }
+  .phase-section::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0.5; }
+  .phase-title { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding-bottom: 16px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); }
+  .phase-title h2 { font-family: 'Orbitron', monospace; font-size: 18px; color: #fff; letter-spacing: 1px; }
+  .phase-badge { font-family: 'Orbitron', monospace; padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+  .phase-badge.preparacao { background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(234, 88, 12, 0.2) 100%); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+  .phase-badge.transito { background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%); color: var(--cyan); border: 1px solid rgba(0, 240, 255, 0.3); }
+  .phase-badge.suporte { background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+  .phase-desc { color: rgba(180, 180, 220, 0.6); font-size: 12px; margin-bottom: 20px; padding-left: 4px; }
+  
+  .carrier-group { margin-bottom: 25px; padding-left: 10px; }
+  .carrier-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+  .carrier-logo { width: 70px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', monospace; font-weight: 900; font-size: 14px; letter-spacing: 1px; position: relative; }
+  .carrier-logo.fedex { background: linear-gradient(135deg, #4D148C 0%, #6B21B8 100%); color: #FF6600; box-shadow: 0 4px 15px rgba(107, 33, 184, 0.4); }
+  .carrier-logo.dhl { background: linear-gradient(135deg, #FFCC00 0%, #FFD633 100%); color: #000; box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4); }
+  .carrier-logo.ups { background: linear-gradient(135deg, #351C15 0%, #5C3328 100%); color: #FFB500; box-shadow: 0 4px 15px rgba(92, 51, 40, 0.4); }
+  .carrier-name { font-family: 'Orbitron', monospace; font-weight: 700; color: #fff; font-size: 15px; letter-spacing: 1px; }
+  .carrier-info { font-size: 12px; color: rgba(180, 180, 220, 0.6); margin-top: 2px; }
+  .carrier-info span { color: var(--cyan); font-weight: 600; }
+  
+  .batch-container { margin-left: 85px; }
+  .batch { position: relative; background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 16px; margin-bottom: 12px; border: 1px solid rgba(0, 240, 255, 0.1); transition: all 0.3s; }
+  .batch:hover { border-color: rgba(0, 240, 255, 0.3); background: rgba(0, 20, 40, 0.4); }
+  .batch-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+  .batch-title { font-family: 'Orbitron', monospace; font-size: 12px; font-weight: 600; color: var(--cyan); letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+  .batch-title::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
+  
+  .batch-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  
+  .copy-btn, .track-btn {
     font-family: 'Orbitron', monospace;
-    color: var(--cyan);
-    margin-bottom: 20px;
-    font-size: 14px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .summary h3::before {
-    content: '';
-    width: 4px;
-    height: 16px;
-    background: var(--cyan);
-    border-radius: 2px;
-    box-shadow: 0 0 10px var(--cyan);
-  }
-  
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-  }
-  
-  .summary-card {
-    position: relative;
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-  
-  .summary-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(0, 240, 255, 0.4);
-    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
-  }
-  
-  .summary-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--cyan), var(--purple));
-  }
-  
-  .summary-card .num {
-    font-family: 'Orbitron', monospace;
-    font-size: 36px;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--cyan) 0%, #fff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-  }
-  
-  .summary-card .lbl {
-    font-family: 'Orbitron', monospace;
-    font-size: 10px;
-    color: rgba(200, 200, 255, 0.7);
-    margin-top: 8px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-  
-  .phase-section {
-    background: linear-gradient(135deg, rgba(10, 10, 40, 0.8) 0%, rgba(20, 10, 50, 0.8) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-    animation: slideUp 0.6s ease-out;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .phase-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, var(--cyan), var(--purple));
-    opacity: 0.5;
-  }
-  
-  .phase-title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 12px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-  }
-  
-  .phase-title h2 {
-    font-family: 'Orbitron', monospace;
-    font-size: 18px;
-    color: #fff;
-    letter-spacing: 1px;
-  }
-  
-  .phase-badge {
-    font-family: 'Orbitron', monospace;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-  
-  .phase-badge.preparacao {
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(234, 88, 12, 0.2) 100%);
-    color: #fbbf24;
-    border: 1px solid rgba(251, 191, 36, 0.3);
-  }
-  
-  .phase-badge.transito {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%);
-    color: var(--cyan);
-    border: 1px solid rgba(0, 240, 255, 0.3);
-  }
-  
-  .phase-badge.suporte {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
-    color: #f87171;
-    border: 1px solid rgba(248, 113, 113, 0.3);
-  }
-  
-  .phase-desc {
-    color: rgba(180, 180, 220, 0.6);
-    font-size: 12px;
-    margin-bottom: 20px;
-    padding-left: 4px;
-  }
-  
-  .carrier-group {
-    margin-bottom: 25px;
-    padding-left: 10px;
-  }
-  
-  .carrier-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .carrier-logo {
-    width: 70px;
-    height: 38px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: 1px;
-    position: relative;
-  }
-  
-  .carrier-logo.fedex {
-    background: linear-gradient(135deg, #4D148C 0%, #6B21B8 100%);
-    color: #FF6600;
-    box-shadow: 0 4px 15px rgba(107, 33, 184, 0.4);
-  }
-  
-  .carrier-logo.dhl {
-    background: linear-gradient(135deg, #FFCC00 0%, #FFD633 100%);
-    color: #000;
-    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
-  }
-  
-  .carrier-logo.ups {
-    background: linear-gradient(135deg, #351C15 0%, #5C3328 100%);
-    color: #FFB500;
-    box-shadow: 0 4px 15px rgba(92, 51, 40, 0.4);
-  }
-  
-  .carrier-name {
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-    color: #fff;
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-  
-  .carrier-info {
-    font-size: 12px;
-    color: rgba(180, 180, 220, 0.6);
-    margin-top: 2px;
-  }
-  
-  .carrier-info span {
-    color: var(--cyan);
-    font-weight: 600;
-  }
-  
-  .batch-container {
-    margin-left: 85px;
-  }
-  
-  .batch {
-    position: relative;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid rgba(0, 240, 255, 0.1);
-    transition: all 0.3s;
-  }
-  
-  .batch:hover {
-    border-color: rgba(0, 240, 255, 0.3);
-    background: rgba(0, 20, 40, 0.4);
-  }
-  
-  .batch-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  
-  .batch-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--cyan);
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .batch-title::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--cyan);
-    animation: pulse 2s infinite;
-  }
-  
-  .copy-btn {
-    font-family: 'Orbitron', monospace;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     border: none;
     padding: 8px 18px;
@@ -529,58 +189,40 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  
+  .copy-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   }
+  .copy-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5); }
+  .copy-btn.copied { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); box-shadow: 0 4px 15px rgba(34, 197, 94, 0.5); }
   
-  .copy-btn:hover {
+  /* BOTÃO DE RASTREAR - NOVO MÓDULO */
+  .track-btn {
+    background: linear-gradient(135deg, var(--orange) 0%, #ff3d00 100%);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  }
+  .track-btn:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+    filter: brightness(1.1);
   }
+  .track-btn.fedex { background: linear-gradient(135deg, #6B21B8 0%, #FF6600 100%); box-shadow: 0 4px 15px rgba(107, 33, 184, 0.4); }
+  .track-btn.dhl { background: linear-gradient(135deg, #FFCC00 0%, #D40511 100%); color: #000; box-shadow: 0 4px 15px rgba(212, 5, 17, 0.4); }
+  .track-btn.ups { background: linear-gradient(135deg, #5C3328 0%, #FFB500 100%); box-shadow: 0 4px 15px rgba(92, 51, 40, 0.4); }
   
-  .copy-btn.copied {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.5);
-  }
+  .awb-textarea { width: 100%; min-height: 120px; padding: 12px 14px; border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 8px; font-family: 'Courier New', monospace; font-size: 13px; resize: vertical; background: rgba(0, 0, 0, 0.4); color: #b0f0ff; line-height: 1.6; transition: all 0.3s; }
+  .awb-textarea:focus { outline: none; border-color: rgba(0, 240, 255, 0.5); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); }
   
-  .awb-textarea {
-    width: 100%;
-    min-height: 120px;
-    padding: 12px 14px;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-    border-radius: 8px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    resize: vertical;
-    background: rgba(0, 0, 0, 0.4);
-    color: #b0f0ff;
-    line-height: 1.6;
-    transition: all 0.3s;
-  }
+  .empty-msg { color: rgba(150, 150, 180, 0.4); font-style: italic; font-size: 13px; padding: 25px; text-align: center; border: 1px dashed rgba(150, 150, 180, 0.15); border-radius: 8px; margin-left: 85px; }
   
-  .awb-textarea:focus {
-    outline: none;
-    border-color: rgba(0, 240, 255, 0.5);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-  }
-  
-  .empty-msg {
-    color: rgba(150, 150, 180, 0.4);
-    font-style: italic;
-    font-size: 13px;
-    padding: 25px;
-    text-align: center;
-    border: 1px dashed rgba(150, 150, 180, 0.15);
-    border-radius: 8px;
-    margin-left: 85px;
-  }
-
-  .corner {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: var(--cyan);
-    opacity: 0.4;
-  }
+  .corner { position: absolute; width: 20px; height: 20px; border-color: var(--cyan); opacity: 0.4; }
   .corner.tl { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
   .corner.tr { top: 8px; right: 8px; border-top: 2px solid; border-right: 2px solid; }
   .corner.bl { bottom: 8px; left: 8px; border-bottom: 2px solid; border-left: 2px solid; }
@@ -590,6 +232,12 @@
   ::-webkit-scrollbar-track { background: var(--darker); }
   ::-webkit-scrollbar-thumb { background: linear-gradient(var(--cyan), var(--purple)); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: linear-gradient(var(--purple), var(--cyan)); }
+  
+  @media (max-width: 600px) {
+    .batch-container { margin-left: 0; }
+    .carrier-header { flex-direction: column; align-items: flex-start; }
+    .batch-header { flex-direction: column; align-items: stretch; }
+  }
 </style>
 </head>
 <body>
@@ -641,31 +289,20 @@ const SUMMARY = document.getElementById('summary');
 const SUMMARY_GRID = document.getElementById('summaryGrid');
 const RESULTS = document.getElementById('results');
 
-const FASES_PREPARACAO = [
-  'etiqueta criada',
-  'aguardando coleta',
-  'coleta com excecao',
-  'coletas reagendadas',
-  'coletas em atraso',
-  'ag atualizacao do rastreio'
-];
-
-const FASES_TRANSITO = [
-  'em transito',
-  'em rota de entrega'
-];
-
-const FASES_FINALIZADAS = [
-  'envios finalizados',
-  'envios retornados',
-  'envios em atraso',
-  'envios cancelados',
-  'finalizado',
-  'cancelado',
-  'retornado'
-];
-
+const FASES_PREPARACAO = ['etiqueta criada', 'aguardando coleta', 'coleta com excecao', 'coletas reagendadas', 'coletas em atraso', 'ag atualizacao do rastreio'];
+const FASES_TRANSITO = ['em transito', 'em rota de entrega'];
+const FASES_FINALIZADAS = ['envios finalizados', 'envios retornados', 'envios em atraso', 'envios cancelados', 'finalizado', 'cancelado', 'retornado'];
 const LIMITES = { FEDEX: 30, DHL: 10, UPS: 25 };
+
+// ====================================================================
+// NOVO MÓDULO: URLs de Rastreio em Lote
+// ====================================================================
+const URLS_RASTREIO = {
+  FEDEX: (awbs) => `https://www.fedex.com/wtrk/track/?trknbr=${awbs.join(',')}`,
+  // UPS atualizada: Separador %20 (espaço) + parâmetro requester no final
+  UPS: (awbs) => `https://www.ups.com/track?loc=pt_BR&trackNums=${awbs.join('%20')}&requester=ST/tracksummary`,
+  DHL: (awbs) => `https://mydhl.express.dhl/br/pt/tracking.html#/results?${awbs.map(a => `id=${a}`).join('&')}`
+};
 
 function normalize(str) {
   if (!str) return '';
@@ -687,7 +324,6 @@ function hexToDec(hex) {
 function isHex(str) {
   if (!str) return false;
   const original = String(str).trim();
-  // Rejeita strings que contenham caracteres típicos de datas ou horários
   if (/[\/\-\.:]/.test(original)) return false;
   const clean = original.toUpperCase().replace(/[^0-9A-F]/g, '');
   return clean.length >= 8 && /^[0-9A-F]+$/.test(clean);
@@ -818,18 +454,12 @@ function findColumn(headers, keywords, excludeKeywords = []) {
     const nh = normalize(h);
     let match = false;
     for (const kw of keywords) {
-      if (nh.includes(normalize(kw))) {
-        match = true;
-        break;
-      }
+      if (nh.includes(normalize(kw))) { match = true; break; }
     }
     if (match) {
       let excluded = false;
       for (const ekw of excludeKeywords) {
-        if (nh.includes(normalize(ekw))) {
-          excluded = true;
-          break;
-        }
+        if (nh.includes(normalize(ekw))) { excluded = true; break; }
       }
       if (!excluded) return h;
     }
@@ -838,10 +468,7 @@ function findColumn(headers, keywords, excludeKeywords = []) {
 }
 
 function processData(data) {
-  if (!data || data.length === 0) {
-    showWarning('A planilha está vazia ou não foi possível ler os dados.');
-    return;
-  }
+  if (!data || data.length === 0) { showWarning('A planilha está vazia ou não foi possível ler os dados.'); return; }
   
   const headers = Object.keys(data[0]);
   const colFase = findColumn(headers, ['fase', 'status', 'etapa']);
@@ -849,10 +476,7 @@ function processData(data) {
   const colTransportadora = findColumn(headers, ['transportadora', 'courier', 'transportador']);
   const colColeta = findColumn(headers, ['n° coleta', 'nº coleta', 'numero coleta', 'número coleta'], ['data', 'agendamento', 'horario', 'horário', 'endereço', 'endereco']);
   
-  if (!colAwb) {
-    showWarning('Não foi encontrada a coluna de AWB na planilha.');
-    return;
-  }
+  if (!colAwb) { showWarning('Não foi encontrada a coluna de AWB na planilha.'); return; }
   
   let hasFinalizadas = false;
   const finalizadasEncontradas = new Set();
@@ -885,8 +509,6 @@ function processData(data) {
     let awbInfo;
     if (carrier === 'FEDEX') {
       awbInfo = processFedExAwb(awbRaw);
-      // Fallback: só tenta usar coluna de coleta se o AWB original NÃO for um formato válido
-      // e se existir uma coluna de número de coleta (não data) identificada
       const awbStr = String(awbRaw || '').trim();
       const awbValido = /^\d{12}$/.test(awbStr.replace(/\D/g, '')) || isHex(awbStr);
       if (!awbValido && colColeta && isHex(coleta)) {
@@ -907,8 +529,7 @@ function processData(data) {
   });
   
   if (hasFinalizadas) {
-    showWarning('AVISO: Planilha enviada sem filtro de negócios em andamento. Envios com status "' + 
-      Array.from(finalizadasEncontradas).join(', ') + '" foram ignorados.');
+    showWarning('AVISO: Planilha enviada sem filtro de negócios em andamento. Envios com status "' + Array.from(finalizadasEncontradas).join(', ') + '" foram ignorados.');
   }
   
   showSummary(totalPorTransportadora);
@@ -917,51 +538,24 @@ function processData(data) {
 
 function showSummary(totais) {
   SUMMARY_GRID.innerHTML = `
-    <div class="summary-card">
-      <div class="num">${totais.FEDEX}</div>
-      <div class="lbl">FedEx</div>
-    </div>
-    <div class="summary-card">
-      <div class="num">${totais.DHL}</div>
-      <div class="lbl">DHL</div>
-    </div>
-    <div class="summary-card">
-      <div class="num">${totais.UPS}</div>
-      <div class="lbl">UPS</div>
-    </div>
-    <div class="summary-card">
-      <div class="num">${totais.FEDEX + totais.DHL + totais.UPS}</div>
-      <div class="lbl">Total</div>
-    </div>
+    <div class="summary-card"><div class="num">${totais.FEDEX}</div><div class="lbl">FedEx</div></div>
+    <div class="summary-card"><div class="num">${totais.DHL}</div><div class="lbl">DHL</div></div>
+    <div class="summary-card"><div class="num">${totais.UPS}</div><div class="lbl">UPS</div></div>
+    <div class="summary-card"><div class="num">${totais.FEDEX + totais.DHL + totais.UPS}</div><div class="lbl">Total</div></div>
   `;
   SUMMARY.classList.add('show');
 }
 
-function showWarning(msg) {
-  WARNING.textContent = msg;
-  WARNING.classList.add('show');
-}
+function showWarning(msg) { WARNING.textContent = msg; WARNING.classList.add('show'); }
 
+// ====================================================================
+// MODIFICAÇÃO: Adicionado botão "Rastrear Lote" ao lado de "Copiar"
+// ====================================================================
 function renderResults(resultado) {
   const secoes = [
-    {
-      key: 'preparacao',
-      titulo: 'Preparação para Coleta',
-      descricao: 'Etiqueta criada • Aguardando Coleta • Coleta com Exceção • Coletas Reagendadas • Coletas em Atraso • AG Atualização do Rastreio',
-      badgeClass: 'preparacao'
-    },
-    {
-      key: 'transito',
-      titulo: 'Em Trânsito / Rota de Entrega',
-      descricao: 'Em Trânsito • Em Rota de Entrega',
-      badgeClass: 'transito'
-    },
-    {
-      key: 'suporte',
-      titulo: 'Tratativa com Suporte',
-      descricao: 'Envios que necessitam de tratativa separada',
-      badgeClass: 'suporte'
-    }
+    { key: 'preparacao', titulo: 'Preparação para Coleta', descricao: 'Etiqueta criada • Aguardando Coleta • Coleta com Exceção • Coletas Reagendadas • Coletas em Atraso • AG Atualização do Rastreio', badgeClass: 'preparacao' },
+    { key: 'transito', titulo: 'Em Trânsito / Rota de Entrega', descricao: 'Em Trânsito • Em Rota de Entrega', badgeClass: 'transito' },
+    { key: 'suporte', titulo: 'Tratativa com Suporte', descricao: 'Envios que necessitam de tratativa separada', badgeClass: 'suporte' }
   ];
   
   let html = '';
@@ -1000,11 +594,22 @@ function renderResults(resultado) {
         lotes.forEach((lote, idx) => {
           const texto = lote.map(a => a.value).join('\n');
           const id = `${secao.key}_${carrier}_${idx}`;
+          
+          // NOVO: Gera URL de rastreio em lote para este lote específico
+          const awbsDoLote = lote.map(a => a.value);
+          const urlRastreio = URLS_RASTREIO[carrier](awbsDoLote);
+          const carrierLower = carrier.toLowerCase();
+          
           html += `
             <div class="batch">
               <div class="batch-header">
                 <span class="batch-title">LOTE ${String(idx + 1).padStart(2, '0')} • ${lote.length} AWB(s)</span>
-                <button class="copy-btn" onclick="copiarTexto('${id}', this)">Copiar</button>
+                <div class="batch-actions">
+                  <button class="copy-btn" onclick="copiarTexto('${id}', this)">📋 Copiar</button>
+                  <a href="${urlRastreio}" target="_blank" rel="noopener noreferrer" class="track-btn ${carrierLower}" title="Rastrear este lote no site da ${nomeCarrier}">
+                    🚀 Rastrear
+                  </a>
+                </div>
               </div>
               <textarea class="awb-textarea" id="${id}" readonly>${texto}</textarea>
             </div>
@@ -1027,10 +632,7 @@ function copiarTexto(id, btn) {
   const original = btn.textContent;
   btn.textContent = 'Copiado!';
   btn.classList.add('copied');
-  setTimeout(() => {
-    btn.textContent = original;
-    btn.classList.remove('copied');
-  }, 2000);
+  setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
 }
 </script>
 </body>
